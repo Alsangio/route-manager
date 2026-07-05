@@ -39,6 +39,15 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
             const wazeUrl = stop.gpsCoordinates 
               ? `https://waze.com/ul?ll=${stop.gpsCoordinates.replace(/[()\s]/g, '')}&navigate=yes`
               : `https://waze.com/ul?q=${encodeURIComponent(stop.address)}&navigate=yes`;
+              
+            let formattedTime = null;
+            if (stop.viewingTime) {
+              const [hourString, minute] = stop.viewingTime.split(':');
+              const hour = parseInt(hourString, 10);
+              const ampm = hour >= 12 ? 'PM' : 'AM';
+              const hour12 = hour % 12 || 12;
+              formattedTime = `${hour12}:${minute} ${ampm}`;
+            }
             
             return (
               <div key={stop.id} className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-indigo-50 relative overflow-hidden">
@@ -53,6 +62,12 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
                     {index + 1}
                   </div>
                   <div>
+                    {formattedTime && (
+                      <p className="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-1 flex items-center gap-1.5 ml-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        Hora: {formattedTime}
+                      </p>
+                    )}
                     <h3 className="text-lg font-bold text-neutral-800 leading-tight mb-1 pr-12 flex items-start gap-1.5">
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-400 mt-0.5 flex-shrink-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                       {stop.address}

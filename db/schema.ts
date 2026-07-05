@@ -20,4 +20,5 @@ export const propertyStops = sqliteTable('property_stops', {
   privateBrokerNotes: text('private_broker_notes'),
   coBrokerName: text('co_broker_name'),
   gpsCoordinates: text('gps_coordinates'),
+  viewingTime: text('viewing_time'),
 });

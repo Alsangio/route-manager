@@ -11,6 +11,7 @@ export async function addStop(routeId: number, formData: FormData): Promise<void
   const privateBrokerNotes = formData.get('privateBrokerNotes') as string;
   const coBrokerName = formData.get('coBrokerName') as string;
   const gpsCoordinates = formData.get('gpsCoordinates') as string;
+  const viewingTime = formData.get('viewingTime') as string;
 
   if (!address) {
     throw new Error('Address is required');
@@ -27,6 +28,7 @@ export async function addStop(routeId: number, formData: FormData): Promise<void
       privateBrokerNotes,
       coBrokerName,
       gpsCoordinates,
+      viewingTime,
       visitOrder: maxOrder + 1,
     });
     
@@ -50,12 +52,13 @@ export async function toggleVisitedStatus(stopId: number, currentStatus: boolean
   }
 }
 
-export async function updateStop(stopId: number, routeId: number, formData: FormData) {
+export async function updateStop(stopId: number, routeId: number, formData: FormData): Promise<void> {
   const address = formData.get('address') as string;
   const crmListingUrl = formData.get('crmListingUrl') as string;
   const privateBrokerNotes = formData.get('privateBrokerNotes') as string;
   const coBrokerName = formData.get('coBrokerName') as string;
   const gpsCoordinates = formData.get('gpsCoordinates') as string;
+  const viewingTime = formData.get('viewingTime') as string;
 
   if (!address) {
     throw new Error('Address is required');
@@ -69,15 +72,14 @@ export async function updateStop(stopId: number, routeId: number, formData: Form
         privateBrokerNotes,
         coBrokerName,
         gpsCoordinates,
+        viewingTime,
       })
       .where(eq(propertyStops.id, stopId));
       
     revalidatePath(`/admin/${routeId}`);
     revalidatePath(`/client/${routeId}`);
-    return { success: true };
   } catch (error) {
     console.error('Error updating stop:', error);
-    return { success: false, error: 'Failed to update property stop' };
   }
 }
 
