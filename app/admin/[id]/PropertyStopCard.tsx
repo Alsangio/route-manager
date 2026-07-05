@@ -86,22 +86,21 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
 
   return (
     <div className={`bg-neutral-900 border ${stop.isVisited ? 'border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.05)]' : 'border-neutral-800'} rounded-2xl p-6 transition-all group`}>
-      <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-4">
-        <div className="flex gap-4 flex-1">
-          <div className="w-10 h-10 shrink-0 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold border border-indigo-500/20">
-            {index + 1}
-          </div>
-          <div>
-            <h3 className="text-xl font-medium text-white leading-snug">{stop.address}</h3>
-            {stop.crmListingUrl && (
-              <a href={stop.crmListingUrl} target="_blank" rel="noreferrer" className="text-sm text-indigo-400 hover:text-indigo-300 underline mt-1.5 inline-block font-medium">
-                View in CRM
-              </a>
-            )}
-          </div>
+      <div className="flex gap-4 items-start mb-4">
+        <div className="w-10 h-10 shrink-0 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold border border-indigo-500/20">
+          {index + 1}
         </div>
-        <div className="flex flex-wrap items-center gap-2 mt-4 sm:mt-0 shrink-0 self-start w-full sm:w-auto">
-          <div className="flex bg-neutral-800 rounded-lg overflow-hidden border border-neutral-700">
+        <div className="flex-1">
+          <h3 className="text-xl font-medium text-white leading-snug">{stop.address}</h3>
+          {stop.crmListingUrl && (
+            <a href={stop.crmListingUrl} target="_blank" rel="noreferrer" className="text-sm text-indigo-400 hover:text-indigo-300 underline mt-1.5 inline-block font-medium">
+              View in CRM
+            </a>
+          )}
+        </div>
+      </div>
+      <div className="flex flex-wrap items-center gap-2 mt-4">
+        <div className="flex bg-neutral-800 rounded-lg overflow-hidden border border-neutral-700">
             <button 
               disabled={isFirst}
               onClick={() => reorderStop(stop.id, routeId, 'up')}
