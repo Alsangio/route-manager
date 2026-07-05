@@ -152,7 +152,6 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
             </button>
           </form>
         </div>
-      </div>
       {(stop.privateBrokerNotes || stop.coBrokerName || stop.gpsCoordinates || stop.viewingTime) && (
         <div className="mt-4 p-4 bg-amber-500/5 border border-amber-500/20 rounded-xl flex flex-col gap-3">
           {stop.coBrokerName && (
