@@ -17,12 +17,12 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
   const stops = await db.select().from(propertyStops).where(eq(propertyStops.routeId, routeId)).orderBy(asc(propertyStops.visitOrder));
 
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-900 pb-20 font-sans">
-      <div className="bg-white pt-12 pb-16 px-6 rounded-b-[2.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] relative overflow-hidden border-b border-neutral-200/50">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50/30 via-white to-purple-50/30 text-neutral-900 pb-20 font-sans">
+      <div className="bg-white/80 backdrop-blur-xl pt-12 pb-16 px-6 rounded-b-[2.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] relative overflow-hidden border-b border-indigo-100/50">
+        <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div className="relative z-10">
-          <p className="text-neutral-400 text-xs tracking-widest font-bold mb-2 uppercase">Your Property Tour with María Virginia</p>
-          <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 mb-1">Hello, {route.clientName}</h1>
+          <p className="text-indigo-500 text-xs tracking-widest font-bold mb-2 uppercase">Your Property Tour with María Virginia</p>
+          <h1 className="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-1">Hello, {route.clientName}</h1>
           <p className="text-neutral-500 font-medium text-lg">
             {new Date(route.showingDate).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
           </p>
@@ -41,7 +41,7 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
               : `https://waze.com/ul?q=${encodeURIComponent(stop.address)}&navigate=yes`;
             
             return (
-              <div key={stop.id} className="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-neutral-200/60 relative overflow-hidden">
+              <div key={stop.id} className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-indigo-50 relative overflow-hidden">
                 {stop.isVisited && (
                   <div className="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-bold px-4 py-1.5 rounded-bl-2xl shadow-sm">
                     VISITED
@@ -49,7 +49,7 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
                 )}
                 
                 <div className="flex gap-4 mb-6 pt-2">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xl shadow-sm">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-indigo-200">
                     {index + 1}
                   </div>
                   <div>
@@ -58,7 +58,7 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
                       {stop.address}
                     </h3>
                     {stop.estimatedArrival && (
-                      <p className="text-sm font-medium text-neutral-500 ml-6">Est. Arrival: {stop.estimatedArrival}</p>
+                      <p className="text-sm font-medium text-indigo-900/60 ml-6">Est. Arrival: {stop.estimatedArrival}</p>
                     )}
                   </div>
                 </div>
@@ -66,7 +66,7 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
                 <div className="flex flex-col gap-3">
                   <a 
                     href={wazeUrl} 
-                    className="flex items-center justify-center gap-2 w-full text-center py-3.5 rounded-xl bg-indigo-600 text-white font-semibold shadow-md hover:bg-indigo-500 active:scale-[0.98] transition-all"
+                    className="flex items-center justify-center gap-2 w-full text-center py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold shadow-md hover:from-indigo-500 hover:to-purple-500 active:scale-[0.98] transition-all"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -76,7 +76,7 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
                   {stop.crmListingUrl && (
                     <Link
                       href={stop.crmListingUrl}
-                      className="block w-full text-center py-3.5 rounded-xl border border-neutral-200 text-neutral-700 bg-white hover:bg-neutral-50 font-medium shadow-sm active:scale-[0.98] transition-all"
+                      className="block w-full text-center py-3.5 rounded-xl border border-indigo-100 text-indigo-700 bg-white hover:bg-indigo-50 font-medium shadow-sm active:scale-[0.98] transition-all"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
