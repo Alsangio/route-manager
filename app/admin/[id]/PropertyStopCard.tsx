@@ -98,7 +98,7 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
           >
             Edit
           </button>
-          <form action={async () => { await toggleVisitedStatus(stop.id, stop.isVisited, routeId); }}>
+          <form action={toggleVisitedStatus.bind(null, stop.id, stop.isVisited, routeId)}>
             <button type="submit" className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${stop.isVisited ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20' : 'bg-neutral-800 text-neutral-300 border-neutral-700 hover:bg-neutral-700 hover:text-white'}`}>
               {stop.isVisited ? '✓ Visited' : 'Mark Visited'}
             </button>

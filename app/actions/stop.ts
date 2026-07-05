@@ -5,7 +5,7 @@ import { propertyStops } from '../../db/schema';
 import { eq, asc } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
-export async function addStop(routeId: number, formData: FormData) {
+export async function addStop(routeId: number, formData: FormData): Promise<void> {
   const address = formData.get('address') as string;
   const crmListingUrl = formData.get('crmListingUrl') as string;
   const privateBrokerNotes = formData.get('privateBrokerNotes') as string;
@@ -15,7 +15,6 @@ export async function addStop(routeId: number, formData: FormData) {
     throw new Error('Address is required');
   }
 
-  // Get current max visitOrder for this route
   const existingStops = await db.select().from(propertyStops).where(eq(propertyStops.routeId, routeId));
   const maxOrder = existingStops.reduce((max, stop) => Math.max(max, stop.visitOrder), 0);
 
@@ -31,14 +30,12 @@ export async function addStop(routeId: number, formData: FormData) {
     
     revalidatePath(`/admin/${routeId}`);
     revalidatePath(`/client/${routeId}`);
-    return { success: true };
   } catch (error) {
     console.error('Error adding stop:', error);
-    return { success: false, error: 'Failed to add property stop' };
   }
 }
 
-export async function toggleVisitedStatus(stopId: number, currentStatus: boolean, routeId: number) {
+export async function toggleVisitedStatus(stopId: number, currentStatus: boolean, routeId: number): Promise<void> {
   try {
     await db.update(propertyStops)
       .set({ isVisited: !currentStatus })
@@ -46,10 +43,8 @@ export async function toggleVisitedStatus(stopId: number, currentStatus: boolean
       
     revalidatePath(`/admin/${routeId}`);
     revalidatePath(`/client/${routeId}`);
-    return { success: true };
   } catch (error) {
     console.error('Error toggling visited status:', error);
-    return { success: false, error: 'Failed to update status' };
   }
 }
 

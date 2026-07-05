@@ -67,7 +67,7 @@ export default async function AdminRoutePage(props: { params: Promise<{ id: stri
           <div>
             <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 sticky top-8">
               <h3 className="text-xl font-semibold mb-6">Add New Stop</h3>
-              <form action={async (formData) => { await handleAddStop(formData); }} className="flex flex-col gap-4">
+              <form action={handleAddStop} className="flex flex-col gap-4">
                 <div>
                   <label className="block text-sm text-neutral-400 mb-1.5">Property Address</label>
                   <input type="text" name="address" required className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500" placeholder="123 Main St..." />

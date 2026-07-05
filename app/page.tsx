@@ -29,7 +29,7 @@ export default async function Home() {
         <div className="mt-12 w-full max-w-md bg-neutral-900/60 p-8 rounded-3xl border border-neutral-800/50 backdrop-blur-xl shadow-2xl relative overflow-hidden text-left">
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent pointer-events-none" />
           <h2 className="text-2xl font-semibold mb-6 text-white relative z-10">Create New Route</h2>
-          <form action={async (formData) => { await createRoute(formData); }} className="flex flex-col gap-5 relative z-10">
+          <form action={createRoute} className="flex flex-col gap-5 relative z-10">
             <div className="flex flex-col gap-2">
               <label htmlFor="clientName" className="text-sm text-neutral-400 font-medium">Client Name</label>
               <input type="text" id="clientName" name="clientName" placeholder="e.g. John Doe" required className="bg-neutral-950/50 border border-neutral-800 rounded-xl px-4 py-3 text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all" />
