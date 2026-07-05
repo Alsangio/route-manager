@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { toggleVisitedStatus, updateStop, reorderStop } from '../../actions/stop';
+import { deleteStop } from '../../actions/actions';
 
 type Stop = {
   id: number;
@@ -17,6 +18,10 @@ type Stop = {
 
 export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast }: { stop: Stop, index: number, routeId: number, isFirst: boolean, isLast: boolean }) {
   const [isEditing, setIsEditing] = useState(false);
+
+  const wazeUrl = stop.gpsCoordinates 
+    ? `https://waze.com/ul?ll=${stop.gpsCoordinates.replace(/[()\s]/g, '')}&navigate=yes`
+    : `https://waze.com/ul?q=${encodeURIComponent(stop.address)}&navigate=yes`;
 
   if (isEditing) {
     return (
@@ -97,12 +102,25 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
               ↓
             </button>
           </div>
+          <a 
+            href={wazeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20"
+          >
+            Drive
+          </a>
           <button 
             onClick={() => setIsEditing(true)} 
             className="px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700"
           >
             Edit
           </button>
+          <form action={deleteStop.bind(null, stop.id, routeId)}>
+            <button type="submit" className="px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/20">
+              Delete
+            </button>
+          </form>
           <form action={toggleVisitedStatus.bind(null, stop.id, stop.isVisited, routeId)}>
             <button type="submit" className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${stop.isVisited ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20' : 'bg-neutral-800 text-neutral-300 border-neutral-700 hover:bg-neutral-700 hover:text-white'}`}>
               {stop.isVisited ? '✓ Visited' : 'Mark Visited'}

@@ -4,6 +4,7 @@ import { routes, propertyStops } from '../../../db/schema';
 import { eq, asc } from 'drizzle-orm';
 import { notFound } from 'next/navigation';
 import { addStop } from '../../actions/stop';
+import { deleteRoute } from '../../actions/actions';
 import Link from 'next/link';
 import PropertyStopCard from './PropertyStopCard';
 import ShareButton from './ShareButton';
@@ -40,6 +41,11 @@ export default async function AdminRoutePage(props: { params: Promise<{ id: stri
               Preview Client View
             </Link>
             <ShareButton routeId={routeId} />
+            <form action={async () => { 'use server'; await deleteRoute(routeId); }}>
+              <button type="submit" className="px-5 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg text-sm font-medium transition-colors border border-red-500/20">
+                Delete Route
+              </button>
+            </form>
           </div>
         </header>
 
