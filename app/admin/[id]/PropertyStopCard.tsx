@@ -10,6 +10,7 @@ type Stop = {
   crmListingUrl: string | null;
   privateBrokerNotes: string | null;
   coBrokerName: string | null;
+  gpsCoordinates: string | null;
   isVisited: boolean;
   visitOrder: number;
 };
@@ -41,6 +42,10 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
           <div>
             <label className="block text-sm text-neutral-400 mb-1.5 font-medium">Co-Broker Name (Optional)</label>
             <input type="text" name="coBrokerName" defaultValue={stop.coBrokerName || ''} className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all" />
+          </div>
+          <div>
+            <label className="block text-sm text-neutral-400 mb-1.5 font-medium">GPS Coordinates (lat, lng) (Optional)</label>
+            <input type="text" name="gpsCoordinates" defaultValue={stop.gpsCoordinates || ''} className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all" placeholder="e.g. 40.7128, -74.0060" />
           </div>
           <div>
             <label className="block text-sm text-neutral-400 mb-1.5 font-medium">Private Broker Notes (Optional)</label>
@@ -105,12 +110,18 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
           </form>
         </div>
       </div>
-      {(stop.privateBrokerNotes || stop.coBrokerName) && (
+      {(stop.privateBrokerNotes || stop.coBrokerName || stop.gpsCoordinates) && (
         <div className="mt-4 p-4 bg-amber-500/5 border border-amber-500/20 rounded-xl flex flex-col gap-3">
           {stop.coBrokerName && (
             <div>
               <p className="text-xs text-amber-500/70 font-bold uppercase tracking-wider mb-1">Co-Broker</p>
               <p className="text-amber-100/90 text-sm font-medium">{stop.coBrokerName}</p>
+            </div>
+          )}
+          {stop.gpsCoordinates && (
+            <div>
+              <p className="text-xs text-amber-500/70 font-bold uppercase tracking-wider mb-1">GPS Coordinates</p>
+              <p className="text-amber-100/90 text-sm font-medium font-mono">{stop.gpsCoordinates}</p>
             </div>
           )}
           {stop.privateBrokerNotes && (

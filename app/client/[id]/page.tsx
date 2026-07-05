@@ -36,7 +36,9 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
           </div>
         ) : (
           stops.map((stop, index) => {
-            const wazeUrl = `https://waze.com/ul?q=${encodeURIComponent(stop.address)}&navigate=yes`;
+            const wazeUrl = stop.gpsCoordinates 
+              ? `https://waze.com/ul?ll=${stop.gpsCoordinates.replace(/\s+/g, '')}&navigate=yes`
+              : `https://waze.com/ul?q=${encodeURIComponent(stop.address)}&navigate=yes`;
             
             return (
               <div key={stop.id} className="bg-white rounded-3xl p-6 shadow-sm border border-neutral-100 relative overflow-hidden">

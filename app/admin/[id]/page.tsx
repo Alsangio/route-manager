@@ -81,6 +81,10 @@ export default async function AdminRoutePage(props: { params: Promise<{ id: stri
                   <input type="text" name="coBrokerName" className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500" placeholder="e.g. Jane Smith..." />
                 </div>
                 <div>
+                  <label className="block text-sm text-neutral-400 mb-1.5">GPS Coordinates (lat, lng) (Optional)</label>
+                  <input type="text" name="gpsCoordinates" className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500" placeholder="e.g. 40.7128, -74.0060" />
+                </div>
+                <div>
                   <label className="block text-sm text-neutral-400 mb-1.5">Private Broker Notes (Optional)</label>
                   <textarea name="privateBrokerNotes" rows={4} className="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500" placeholder="Lockbox code, seller quirks..."></textarea>
                 </div>

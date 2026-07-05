@@ -10,6 +10,7 @@ export async function addStop(routeId: number, formData: FormData): Promise<void
   const crmListingUrl = formData.get('crmListingUrl') as string;
   const privateBrokerNotes = formData.get('privateBrokerNotes') as string;
   const coBrokerName = formData.get('coBrokerName') as string;
+  const gpsCoordinates = formData.get('gpsCoordinates') as string;
 
   if (!address) {
     throw new Error('Address is required');
@@ -25,6 +26,7 @@ export async function addStop(routeId: number, formData: FormData): Promise<void
       crmListingUrl,
       privateBrokerNotes,
       coBrokerName,
+      gpsCoordinates,
       visitOrder: maxOrder + 1,
     });
     
@@ -53,6 +55,7 @@ export async function updateStop(stopId: number, routeId: number, formData: Form
   const crmListingUrl = formData.get('crmListingUrl') as string;
   const privateBrokerNotes = formData.get('privateBrokerNotes') as string;
   const coBrokerName = formData.get('coBrokerName') as string;
+  const gpsCoordinates = formData.get('gpsCoordinates') as string;
 
   if (!address) {
     throw new Error('Address is required');
@@ -65,6 +68,7 @@ export async function updateStop(stopId: number, routeId: number, formData: Form
         crmListingUrl,
         privateBrokerNotes,
         coBrokerName,
+        gpsCoordinates,
       })
       .where(eq(propertyStops.id, stopId));
       

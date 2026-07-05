@@ -19,4 +19,5 @@ export const propertyStops = sqliteTable('property_stops', {
   isVisited: integer('is_visited', { mode: 'boolean' }).notNull().default(false),
   privateBrokerNotes: text('private_broker_notes'),
   coBrokerName: text('co_broker_name'),
+  gpsCoordinates: text('gps_coordinates'),
 });
