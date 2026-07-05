@@ -21,10 +21,10 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
       <div className="bg-white/80 backdrop-blur-xl pt-12 pb-16 px-6 rounded-b-[2.5rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] relative overflow-hidden border-b border-indigo-100/50">
         <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div className="relative z-10">
-          <p className="text-indigo-500 text-xs tracking-widest font-bold mb-2 uppercase">Your Property Tour with María Virginia</p>
-          <h1 className="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-1">Hello, {route.clientName}</h1>
-          <p className="text-neutral-500 font-medium text-lg">
-            {new Date(route.showingDate).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
+          <p className="text-indigo-500 text-xs tracking-widest font-bold mb-2 uppercase">Tu Recorrido de Propiedades con María Virginia</p>
+          <h1 className="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-1">Hola, {route.clientName}</h1>
+          <p className="text-neutral-500 font-medium text-lg capitalize">
+            {new Intl.DateTimeFormat('es-DO', { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date(route.showingDate))}
           </p>
         </div>
       </div>
@@ -32,7 +32,7 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
       <div className="max-w-md mx-auto px-4 -mt-8 space-y-4 relative z-20">
         {stops.length === 0 ? (
           <div className="bg-white rounded-3xl p-8 shadow-sm text-center text-neutral-500 border border-neutral-100">
-            Your tour stops are being prepared. Check back shortly.
+            Tus paradas están siendo preparadas. Vuelve a revisar en breve.
           </div>
         ) : (
           stops.map((stop, index) => {
@@ -44,7 +44,7 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
               <div key={stop.id} className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-indigo-50 relative overflow-hidden">
                 {stop.isVisited && (
                   <div className="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-bold px-4 py-1.5 rounded-bl-2xl shadow-sm">
-                    VISITED
+                    VISITADO
                   </div>
                 )}
                 
@@ -58,7 +58,7 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
                       {stop.address}
                     </h3>
                     {stop.estimatedArrival && (
-                      <p className="text-sm font-medium text-indigo-900/60 ml-6">Est. Arrival: {stop.estimatedArrival}</p>
+                      <p className="text-sm font-medium text-indigo-900/60 ml-6">Llegada est.: {stop.estimatedArrival}</p>
                     )}
                   </div>
                 </div>
@@ -71,7 +71,7 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
                     rel="noopener noreferrer"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
-                    Drive to Property
+                    Ir a la Propiedad
                   </a>
                   {stop.crmListingUrl && (
                     <Link
@@ -80,7 +80,7 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      View Listing
+                      Ver Detalles
                     </Link>
                   )}
                 </div>
