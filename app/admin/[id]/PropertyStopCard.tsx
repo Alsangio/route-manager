@@ -24,6 +24,15 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
     ? `https://waze.com/ul?ll=${stop.gpsCoordinates.replace(/[()\s]/g, '')}&navigate=yes`
     : `https://waze.com/ul?q=${encodeURIComponent(stop.address)}&navigate=yes`;
 
+  let formattedTime = stop.viewingTime;
+  if (stop.viewingTime) {
+    const [hourString, minute] = stop.viewingTime.split(':');
+    const hour = parseInt(hourString, 10);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const hour12 = hour % 12 || 12;
+    formattedTime = `${hour12}:${minute} ${ampm}`;
+  }
+
   if (isEditing) {
     return (
       <div className="bg-neutral-900 border border-indigo-500/50 rounded-2xl p-6 transition-all shadow-[0_0_20px_rgba(79,70,229,0.1)]">
@@ -144,7 +153,7 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
           {stop.viewingTime && (
             <div>
               <p className="text-xs text-amber-500/70 font-bold uppercase tracking-wider mb-1">Viewing Time</p>
-              <p className="text-amber-100/90 text-sm font-medium">{stop.viewingTime}</p>
+              <p className="text-amber-100/90 text-sm font-medium">{formattedTime}</p>
             </div>
           )}
           {stop.gpsCoordinates && (
