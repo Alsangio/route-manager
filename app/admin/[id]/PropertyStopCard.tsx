@@ -34,8 +34,8 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
           </button>
         </div>
         <form action={async (formData) => {
-          const res = await updateStop(stop.id, routeId, formData);
-          if (res.success) setIsEditing(false);
+          await updateStop(stop.id, routeId, formData);
+          setIsEditing(false);
         }} className="flex flex-col gap-4">
           <div>
             <label className="block text-sm text-neutral-400 mb-1.5 font-medium">Property Address</label>
