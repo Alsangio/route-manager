@@ -23,6 +23,10 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
   const wazeUrl = stop.gpsCoordinates 
     ? `https://waze.com/ul?ll=${stop.gpsCoordinates.replace(/[()\s]/g, '')}&navigate=yes`
     : `https://waze.com/ul?q=${encodeURIComponent(stop.address)}&navigate=yes`;
+    
+  const googleMapsUrl = stop.gpsCoordinates
+    ? `https://www.google.com/maps/search/?api=1&query=${stop.gpsCoordinates.replace(/[()\s]/g, '')}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.address)}`;
 
   let formattedTime = stop.viewingTime;
   if (stop.viewingTime) {
@@ -122,7 +126,15 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
             rel="noopener noreferrer"
             className="px-3 py-2 md:px-4 rounded-lg text-xs md:text-sm font-medium transition-colors bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 whitespace-nowrap"
           >
-            Drive
+            Waze
+          </a>
+          <a 
+            href={googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-2 md:px-4 rounded-lg text-xs md:text-sm font-medium transition-colors bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 border border-blue-500/20 whitespace-nowrap"
+          >
+            Google Maps
           </a>
           <button 
             onClick={() => setIsEditing(true)} 

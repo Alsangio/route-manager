@@ -40,6 +40,10 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
               ? `https://waze.com/ul?ll=${stop.gpsCoordinates.replace(/[()\s]/g, '')}&navigate=yes`
               : `https://waze.com/ul?q=${encodeURIComponent(stop.address)}&navigate=yes`;
               
+            const googleMapsUrl = stop.gpsCoordinates
+              ? `https://www.google.com/maps/search/?api=1&query=${stop.gpsCoordinates.replace(/[()\s]/g, '')}`
+              : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.address)}`;
+              
             let formattedTime = null;
             if (stop.viewingTime) {
               const [hourString, minute] = stop.viewingTime.split(':');
@@ -86,7 +90,16 @@ export default async function ClientRoutePage(props: { params: Promise<{ id: str
                     rel="noopener noreferrer"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
-                    Ir a la Propiedad
+                    Ir con Waze
+                  </a>
+                  <a 
+                    href={googleMapsUrl} 
+                    className="flex items-center justify-center gap-2 w-full text-center py-3.5 rounded-xl bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 active:scale-[0.98] transition-all"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Ir con Google Maps
                   </a>
                   {stop.crmListingUrl && (
                     <Link
