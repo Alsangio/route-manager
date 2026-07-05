@@ -82,7 +82,7 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
             )}
           </div>
         </div>
-        <div className="flex gap-2 shrink-0 self-start">
+        <div className="flex flex-wrap items-center gap-2 mt-4 sm:mt-0 shrink-0 self-start w-full sm:w-auto">
           <div className="flex bg-neutral-800 rounded-lg overflow-hidden border border-neutral-700">
             <button 
               disabled={isFirst}
@@ -106,23 +106,23 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
             href={wazeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20"
+            className="px-3 py-2 md:px-4 rounded-lg text-xs md:text-sm font-medium transition-colors bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 whitespace-nowrap"
           >
             Drive
           </a>
           <button 
             onClick={() => setIsEditing(true)} 
-            className="px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700"
+            className="px-3 py-2 md:px-4 rounded-lg text-xs md:text-sm font-medium transition-colors bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700 whitespace-nowrap"
           >
             Edit
           </button>
           <form action={deleteStop.bind(null, stop.id, routeId)}>
-            <button type="submit" className="px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/20">
+            <button type="submit" className="px-3 py-2 md:px-4 rounded-lg text-xs md:text-sm font-medium transition-colors bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/20 whitespace-nowrap">
               Delete
             </button>
           </form>
           <form action={toggleVisitedStatus.bind(null, stop.id, stop.isVisited, routeId)}>
-            <button type="submit" className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${stop.isVisited ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20' : 'bg-neutral-800 text-neutral-300 border-neutral-700 hover:bg-neutral-700 hover:text-white'}`}>
+            <button type="submit" className={`px-3 py-2 md:px-4 rounded-lg text-xs md:text-sm font-medium transition-colors border whitespace-nowrap ${stop.isVisited ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20' : 'bg-neutral-800 text-neutral-300 border-neutral-700 hover:bg-neutral-700 hover:text-white'}`}>
               {stop.isVisited ? '✓ Visited' : 'Mark Visited'}
             </button>
           </form>
