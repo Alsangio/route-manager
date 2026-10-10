@@ -100,10 +100,10 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-2 mt-4">
-        <div className="flex bg-neutral-800 rounded-lg overflow-hidden border border-neutral-700">
+        <form className="flex bg-neutral-800 rounded-lg overflow-hidden border border-neutral-700">
             <button 
               disabled={isFirst}
-              onClick={() => reorderStop(stop.id, routeId, 'up')}
+              formAction={reorderStop.bind(null, stop.id, routeId, 'up')}
               className="px-2 py-2 text-neutral-400 hover:bg-neutral-700 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               title="Move Up"
             >
@@ -112,13 +112,13 @@ export default function PropertyStopCard({ stop, index, routeId, isFirst, isLast
             <div className="w-px bg-neutral-700"></div>
             <button 
               disabled={isLast}
-              onClick={() => reorderStop(stop.id, routeId, 'down')}
+              formAction={reorderStop.bind(null, stop.id, routeId, 'down')}
               className="px-2 py-2 text-neutral-400 hover:bg-neutral-700 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               title="Move Down"
             >
               ↓
             </button>
-          </div>
+          </form>
           <a 
             href={wazeUrl}
             target="_blank"
